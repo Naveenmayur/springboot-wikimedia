@@ -23,6 +23,7 @@
     </developers>
     <modules>
         <module>Kafka-Producer</module>
+        <module>Kafka-Consumer-Database</module>
     </modules>
     <scm>
         <connection/>
