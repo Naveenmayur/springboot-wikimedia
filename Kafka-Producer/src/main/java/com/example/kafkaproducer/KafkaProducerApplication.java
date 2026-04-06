@@ -1,12 +1,23 @@
 package com.example.kafkaproducer;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KafkaProducerApplication {
+public class KafkaProducerApplication implements CommandLineRunner{
 
     public static void main(String[] args) {
          SpringApplication.run(KafkaProducerApplication.class, args);
+    }
+
+    @Autowired
+    private WikimediaChangesProducer wikimediaChangesProducer;
+
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println("Kafka Producer Application Started...");
+        wikimediaChangesProducer.sendMessage();
     }
 }

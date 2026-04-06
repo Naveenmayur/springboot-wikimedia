@@ -11,9 +11,8 @@ public class WikimediaChangesHandler implements BackgroundEventHandler {
 
     public static final Logger logger = LoggerFactory.getLogger(WikimediaChangesHandler.class);
 
-    private KafkaTemplate<String, String> kafkaTemplate;
-    @Value("${kafka.topic.name}")
-    private String topicName;
+    private final KafkaTemplate<String, String> kafkaTemplate;
+    private final String topicName;
 
     public WikimediaChangesHandler(KafkaTemplate<String, String> kafkaTemplate, String topicName) {
         this.kafkaTemplate = kafkaTemplate;
@@ -22,12 +21,12 @@ public class WikimediaChangesHandler implements BackgroundEventHandler {
 
     @Override
     public void onOpen() throws Exception {
-
+        logger.info("Connection to Wikimedia stream opened successfully");
     }
 
     @Override
     public void onClosed() throws Exception {
-
+        logger.info("Wikimedia event stream closed");
     }
 
     @Override
@@ -43,6 +42,6 @@ public class WikimediaChangesHandler implements BackgroundEventHandler {
 
     @Override
     public void onError(Throwable t) {
-
+        logger.error("Error in Wikimedia event stream", t);
     }
 }
