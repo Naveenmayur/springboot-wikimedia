@@ -24,6 +24,10 @@ public class WikimediaChangesProducer {
 
     @Value("${wikimedia.url}")
     private String wikimediaUrl;
+
+    @Value("${wikimedia.user-agent}")
+    private String userAgent;
+
     private final KafkaTemplate<String, String> kafkaTemplate;
 
     public WikimediaChangesProducer(KafkaTemplate<String, String> kafkaTemplate) {
@@ -37,7 +41,7 @@ public class WikimediaChangesProducer {
 
         // Build the required headers (User-Agent is mandatory)
         Headers headers = new Headers.Builder()
-                .add("User-Agent", "KafkaWikimediaProducer/1.0 (Bengaluru; https://github.com/naveenmayurkr; naveenmayurkr@gmail.com)")
+                .add("User-Agent", userAgent)
                 .add("Accept", "text/event-stream")
                 .build();
 
